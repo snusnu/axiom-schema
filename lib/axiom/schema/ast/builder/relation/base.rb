@@ -40,25 +40,25 @@ module Axiom
             end
 
             def with_database(name)
-              update((children.take(4) << new_node(:database, [name])) + children.drop(5))
+              update((children.take(4) << new_node(:database, name)) + children.drop(5))
             end
 
             def with_pk_constraint(header)
-              update((children.take(3) << new_node(:pk_constraint, header)) + children.drop(4))
+              update((children.take(3) << new_node(:pk_constraint, *header)) + children.drop(4))
             end
 
             def with_aliases(new_aliases)
-              update(children.take(5) << new_node(:aliases, [new_aliases]) << name)
+              update(children.take(5) << new_node(:aliases, new_aliases) << name)
             end
 
             def with_name(new_name)
-              update(children.take(6) << new_node(:name, [new_name]))
+              update(children.take(6) << new_node(:name, new_name))
             end
 
             private
 
-            def new_node(name, args)
-              send(name).updated(nil, args)
+            def new_node(name, *args)
+              send(name).updated(nil, Array(args))
             end
 
           end # Base
