@@ -31,11 +31,11 @@ module Axiom
             end
 
             def add_key_constraint(header)
-              update([attributes, key_constraints << s(:key_constraint, *header)] + children.drop(2))
+              update((children.take(1) << (key_constraints << s(:key_constraint, *header))) + children.drop(2))
             end
 
             def add_fk_constraint(header)
-              update([attributes, key_constraints, fk_constraints << s(:fk_constraint, *header)] + children.drop(3))
+              update((children.take(2) << (fk_constraints << s(:fk_constraint, *header))) + children.drop(3))
             end
 
             def with_database(name)
