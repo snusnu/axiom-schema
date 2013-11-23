@@ -36,7 +36,6 @@ module Axiom
 
             def add_fk_constraint(header)
               update((children.take(2) << (fk_constraints << s(:fk_constraint, *header))) + children.drop(3))
-              update((children.take(2) << (fk_constraints << s(:fk_constraint, *header))) + children.drop(3))
             end
 
             def with_database(name)
