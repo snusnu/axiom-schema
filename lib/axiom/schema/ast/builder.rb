@@ -15,7 +15,7 @@ module Axiom
         end
 
         def self.root
-          s(self::TYPE, *self::CHILDREN.map { |child| s(child) })
+          s(self::TYPE, *self::CHILDREN.map(&method(:s)))
         end
 
         # Create name helpers
