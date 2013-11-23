@@ -19,6 +19,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'axiom-optimizer', '~> 0.1.1'
   gem.add_dependency 'addressable',     '~> 2.3', '>= 2.3.5'
   gem.add_dependency 'concord',         '~> 0.1.4'
+  gem.add_dependency 'anima',           '~> 0.1.1'
   gem.add_dependency 'abstract_type',   '~> 0.0.7'
   gem.add_dependency 'adamantium',      '~> 0.1'
+  gem.add_dependency 'ast',             '~> 1.1.0'
 end
