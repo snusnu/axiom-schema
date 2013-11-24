@@ -48,11 +48,15 @@ module Axiom
             end
 
             def with_aliases(new_aliases)
-              update(children.take(5) << new_node(:aliases, new_aliases) << name)
+              update((children.take(5) << new_node(:aliases, new_aliases)) + children.drop(6))
             end
 
             def with_name(new_name)
               update(children.take(6) << new_node(:name, new_name))
+            end
+
+            def has_pk_constraint?
+              pk_constraint.children.any?
             end
 
             private

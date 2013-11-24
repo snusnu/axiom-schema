@@ -7,6 +7,16 @@ require 'concord'
 require 'abstract_type'
 require 'adamantium'
 
+module Axiom
+  class Schema
+
+    # Raised when trying to establish more than one
+    # primary key constraint for a base relation
+    DuplicatePrimaryKey = Class.new(StandardError)
+
+  end # Schema
+end # Axiom
+
 require 'axiom/schema'
 require 'axiom/schema/version'
 require 'axiom/schema/ast/builder'

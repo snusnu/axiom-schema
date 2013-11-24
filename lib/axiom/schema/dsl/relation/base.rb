@@ -14,6 +14,8 @@ module Axiom
 
           DEFAULT_KEY_OPTIONS = { primary: false }.freeze
 
+          DUPLICATE_PK_MSG = '%s is already defined'.freeze
+
           def self.extract_options(args)
             args = args.dup # don't mutate the outside world
             opts = args.last.is_a?(Hash) ? args.pop : DEFAULT_KEY_OPTIONS
@@ -31,6 +33,7 @@ module Axiom
           def key(*args)
             header, options = self.class.extract_options(args)
             if options.fetch(:primary)
+              assert_singular_pk_constraint
               builder.with_pk_constraint(header)
             else
               builder.add_key_constraint(header)
@@ -43,6 +46,15 @@ module Axiom
 
           def rename(aliases)
             builder.with_aliases(aliases)
+          end
+
+          private
+
+          def assert_singular_pk_constraint
+            if builder.has_pk_constraint?
+              pk = builder.pk_constraint.to_sexp
+              fail DuplicatePrimaryKey, DUPLICATE_PK_MSG % pk
+            end
           end
 
         end # Base

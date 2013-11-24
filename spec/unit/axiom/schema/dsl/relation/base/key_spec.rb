@@ -34,6 +34,18 @@ describe Schema::DSL::Relation::Base, '#key' do
 
       it_behaves_like 'an ast node builder'
     end
+
+    context 'and another pk constraint has already been defined' do
+      subject { object.key(:id, primary: true) }
+      before  { object.key(:id, primary: true) }
+
+      it 'raises DuplicatePrimaryKey' do
+        error = Axiom::Schema::DuplicatePrimaryKey
+        msg   = '(pk-constraint :id) is already defined'
+        expect { subject }.to raise_error(error, msg)
+      end
+    end
+
   end
 
   context 'when a unique constraint is established' do
