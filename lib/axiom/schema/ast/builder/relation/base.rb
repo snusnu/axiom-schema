@@ -38,12 +38,12 @@ module Axiom
               update((children.take(2) << (fk_constraints << s(:fk_constraint, *header))) + children.drop(3))
             end
 
-            def with_database(name)
-              update((children.take(4) << new_node(:database, name)) + children.drop(5))
-            end
-
             def with_pk_constraint(header)
               update((children.take(3) << new_node(:pk_constraint, *header)) + children.drop(4))
+            end
+
+            def with_database(name)
+              update((children.take(4) << new_node(:database, name)) + children.drop(5))
             end
 
             def with_aliases(new_aliases)
