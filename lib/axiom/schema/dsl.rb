@@ -4,7 +4,9 @@ module Axiom
   class Schema
     class DSL
 
+      include AbstractType
       include Concord.new(:builder)
+      include Adamantium::Flat
 
       def self.new(builder = self::BUILDER.new)
         super

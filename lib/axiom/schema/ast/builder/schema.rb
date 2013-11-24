@@ -5,7 +5,7 @@ module Axiom
     module AST
       class Builder
 
-        # Mutable DSL object to help with building an axiom base relation
+        # Mutable AST::Node builder for axiom schema instances
         class Schema < self
 
           TYPE     = :schema

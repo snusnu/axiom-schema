@@ -6,6 +6,7 @@ module Axiom
       class Builder
         class Relation < self
 
+          # Mutable AST::Node builder for base relations
           class Base < Builder
 
             TYPE = :base_relation

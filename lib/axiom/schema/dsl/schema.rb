@@ -4,7 +4,7 @@ module Axiom
   class Schema
     class DSL
 
-      # Mutable DSL object used for building an AST for {Schema}
+      # DSL object to support building {Axiom::Schema} nodes
       #
       # Serves as the entry point for AST generation
       #

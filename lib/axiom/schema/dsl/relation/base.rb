@@ -5,7 +5,7 @@ module Axiom
     class DSL
       class Relation < self
 
-        # Mutable DSL object to help with building an axiom base relation
+        # DSL object to support building {Axiom::Relation::Base} nodes
         class Base < DSL
 
           extend Named

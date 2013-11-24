@@ -4,9 +4,7 @@ module Axiom
   class Schema
     class DSL
 
-      # Mutable DSL object to help with building a virtual axiom relation
-      #
-      # @private
+      # DSL object to support building {Axiom::Relation} nodes
       class Relation < self
 
         BUILDER = AST::Builder::Relation

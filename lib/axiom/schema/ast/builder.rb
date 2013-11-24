@@ -3,12 +3,18 @@
 module Axiom
   class Schema
     module AST
+
+      # Base class for mutable AST::Node builders
+      #
+      # @abstract
       class Builder
+
+        include AbstractType
 
         include ::AST::Sexp
         extend  ::AST::Sexp
 
-        include AST
+        include Concord.new(:ast)
 
         def self.new(ast = root)
           super(ast)
@@ -46,6 +52,10 @@ module Axiom
           end
         end
         private_class_method :define_named_child
+
+        def to_ast
+          ast
+        end
 
         private
 
