@@ -9,7 +9,6 @@ require 'adamantium'
 
 require 'axiom/schema'
 require 'axiom/schema/version'
-require 'axiom/schema/database'
 require 'axiom/schema/ast/builder'
 require 'axiom/schema/ast/builder/relation/base'
 require 'axiom/schema/ast/builder/relation'
