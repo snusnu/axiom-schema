@@ -58,7 +58,7 @@ module Axiom
             private
 
             def new_node(name, *args)
-              send(name).updated(nil, Array(args))
+              send(name).updated(nil, args)
             end
 
           end # Base
