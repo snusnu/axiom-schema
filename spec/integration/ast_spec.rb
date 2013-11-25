@@ -38,7 +38,7 @@ describe Axiom::Schema::DSL::Schema, '.build' do
     end
   end
 
-  let(:ast) do
+  let(:expected) do
 
     s(:schema,
       s(:databases,
@@ -72,8 +72,5 @@ describe Axiom::Schema::DSL::Schema, '.build' do
           s(:name, :addresses))))
   end
 
-  it 'allows to retrieve registered relations' do
-    expect(subject.to_ast).to eq(ast)
-  end
-
+  it_behaves_like 'an ast node builder'
 end
