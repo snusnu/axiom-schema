@@ -14,6 +14,10 @@ module Axiom
 
         BUILDER = AST::Builder::Schema
 
+        def self.build(&block)
+          new.instance_eval(&block)
+        end
+
         def database(name, uri)
           builder.add_database(name, uri)
         end
