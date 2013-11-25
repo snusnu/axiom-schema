@@ -33,7 +33,6 @@ describe Axiom::Schema::DSL::Schema, '.build' do
         foreign_key person_id: [:people, :id]
 
         rename zip: :zipcode
-
       end
     end
   end
