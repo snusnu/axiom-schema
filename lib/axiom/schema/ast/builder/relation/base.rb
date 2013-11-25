@@ -35,8 +35,8 @@ module Axiom
               update((children.take(1) << (key_constraints << s(:key_constraint, *header))) + children.drop(2))
             end
 
-            def add_fk_constraint(header)
-              update((children.take(2) << (fk_constraints << s(:fk_constraint, *header))) + children.drop(3))
+            def add_fk_constraint(references)
+              update((children.take(2) << (fk_constraints << fk_constraint(references))) + children.drop(3))
             end
 
             def with_pk_constraint(header)
@@ -60,6 +60,10 @@ module Axiom
             end
 
             private
+
+            def fk_constraint(references)
+              s(:fk_constraint, *references.map { |pair| s(:reference, *pair.flatten) })
+            end
 
             def new_node(name, *args)
               send(name).updated(nil, args)

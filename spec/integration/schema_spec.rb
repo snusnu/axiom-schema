@@ -32,7 +32,7 @@ describe 'Defining a schema of axiom relations' do
         rename zip: :zipcode
 
         key :id, primary: true
-        foreign_key :person_id, people.id
+        foreign_key person_id: people.id
       end
 
       base_relation(:tasks) do
@@ -43,7 +43,7 @@ describe 'Defining a schema of axiom relations' do
         attribute :name,      String
 
         key :id, primary: true
-        foreign_key :person_id, people.id
+        foreign_key person_id: people.id
       end
 
       relation(:people_with_tasks) do

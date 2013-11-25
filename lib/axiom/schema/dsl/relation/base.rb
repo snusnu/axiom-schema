@@ -40,8 +40,8 @@ module Axiom
             end
           end
 
-          def foreign_key(header)
-            builder.add_fk_constraint(header)
+          def foreign_key(references)
+            builder.add_fk_constraint(references)
           end
 
           def rename(aliases)
