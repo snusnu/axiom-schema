@@ -62,7 +62,9 @@ module Axiom
             private
 
             def fk_constraint(references)
-              s(:fk_constraint, *references.map { |pair| s(:reference, *pair.flatten) })
+              s(:fk_constraint, *references.map { |name, path|
+                s(:reference, name, *path)
+              })
             end
 
             def new_node(name, *args)

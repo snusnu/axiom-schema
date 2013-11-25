@@ -30,7 +30,7 @@ describe Axiom::Schema::DSL::Schema, '.build' do
 
         key :id, primary: true
 
-        foreign_key person_id: [:people, :id]
+        foreign_key person_id: people.id
 
         rename zip: :zipcode
       end

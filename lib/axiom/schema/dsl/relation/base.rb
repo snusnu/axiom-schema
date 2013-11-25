@@ -50,6 +50,10 @@ module Axiom
 
           private
 
+          def method_missing(name)
+            Attribute.new(name)
+          end
+
           def assert_singular_pk_constraint
             if builder.has_pk_constraint?
               pk = builder.pk_constraint.to_sexp
