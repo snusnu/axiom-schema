@@ -70,7 +70,7 @@ module Axiom
             update([new_node(name, *args)] + children.drop(1))
           elsif idx < last
             update((children.take(idx) << new_node(name, *args)) + children.drop(idx + 1))
-          elsif idx == last
+          else
             update(children.take(idx) << new_node(name, *args))
           end
         end
@@ -81,7 +81,7 @@ module Axiom
             update([children.at(idx) << s(name, *args)] + children.drop(1))
           elsif idx < last
             update((children.take(idx) << (children.at(idx) << s(name, *args))) + children.drop(idx + 1))
-          elsif idx == last
+          else
             update(children.take(idx) << s(name, *args))
           end
         end
