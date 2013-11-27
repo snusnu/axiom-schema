@@ -14,6 +14,7 @@ gem 'axiom-schema', path: '.'
 
 gem 'axiom',           github('dkubb/axiom')
 gem 'axiom-optimizer', github('dkubb/axiom-optimizer')
+gem 'memoizable',      github('dkubb/memoizable')
 
 group :test do
   gem 'axiom-memory-adapter', github('dkubb/axiom-memory-adapter')

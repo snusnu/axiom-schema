@@ -28,31 +28,31 @@ module Axiom
             end
 
             def add_attribute(*args)
-              update([attributes << s(:attribute, *args)] + children.drop(1))
+              add_terminal(:attributes, :attribute, *args)
             end
 
             def add_key_constraint(header)
-              update((children.take(1) << (key_constraints << s(:key_constraint, *header))) + children.drop(2))
+              add_terminal(:key_constraints, :key_constraint, *header)
             end
 
             def add_fk_constraint(references)
-              update((children.take(2) << (fk_constraints << fk_constraint(references))) + children.drop(3))
+              add_terminal(:fk_constraints, :fk_constraint, *refs(references))
             end
 
             def with_pk_constraint(header)
-              update((children.take(3) << new_node(:pk_constraint, *header)) + children.drop(4))
+              update_terminal(:pk_constraint, *header)
             end
 
             def with_database(name)
-              update((children.take(4) << new_node(:database, name)) + children.drop(5))
+              update_terminal(:database, name)
             end
 
             def with_aliases(new_aliases)
-              update((children.take(5) << new_node(:aliases, new_aliases)) + children.drop(6))
+              update_terminal(:aliases, new_aliases)
             end
 
             def with_name(new_name)
-              update(children.take(6) << new_node(:name, new_name))
+              update_terminal(:name, new_name)
             end
 
             def has_pk_constraint?
@@ -61,14 +61,8 @@ module Axiom
 
             private
 
-            def fk_constraint(references)
-              s(:fk_constraint, *references.map { |name, path|
-                s(:reference, name, *path)
-              })
-            end
-
-            def new_node(name, *args)
-              send(name).updated(nil, args)
+            def refs(references)
+              references.map { |name, path| s(:reference, name, *path) }
             end
 
           end # Base

@@ -6,6 +6,7 @@ require 'ast'
 require 'concord'
 require 'abstract_type'
 require 'adamantium'
+require 'memoizable'
 
 module Axiom
   class Schema

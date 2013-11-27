@@ -10,6 +10,7 @@ module Axiom
       class Builder
 
         include AbstractType
+        include Memoizable
 
         include ::AST::Sexp
         extend  ::AST::Sexp
@@ -61,6 +62,46 @@ module Axiom
 
         def children
           ast.children
+        end
+
+        def update_terminal(name, *args)
+          idx, last = index(name), last_index
+          if idx == 0
+            update([new_node(name, *args)] + children.drop(1))
+          elsif idx < last
+            update((children.take(idx) << new_node(name, *args)) + children.drop(idx + 1))
+          elsif idx == last
+            update(children.take(idx) << new_node(name, *args))
+          end
+        end
+
+        def add_terminal(parent, name, *args)
+          idx, last = index(parent), last_index
+          if idx == 0
+            update([children.at(idx) << s(name, *args)] + children.drop(1))
+          elsif idx < last
+            update((children.take(idx) << (children.at(idx) << s(name, *args))) + children.drop(idx + 1))
+          elsif idx == last
+            update(children.take(idx) << s(name, *args))
+          end
+        end
+
+        def index(name)
+          child_names.index(name)
+        end
+
+        def last_index
+          child_names.size - 1
+        end
+        memoize :last_index
+
+        def child_names
+          self.class::CHILDREN
+        end
+        memoize :child_names
+
+        def new_node(name, *args)
+          send(name).updated(nil, args)
         end
 
         def update(new_children)
