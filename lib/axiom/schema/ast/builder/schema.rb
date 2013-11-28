@@ -14,15 +14,15 @@ module Axiom
           children(*CHILDREN)
 
           def add_database(name, uri)
-            update([databases << s(:database, name, uri)] << relations)
+            add(:databases, :database, name, uri)
           end
 
           def add_base_relation(node)
-            update([databases] << (relations << node))
+            add_node(:relations, :base_relation, node)
           end
 
           def add_relation(node)
-            update([databases] << (relations << node))
+            add_node(:relations, :relation, node)
           end
 
         end # Schema

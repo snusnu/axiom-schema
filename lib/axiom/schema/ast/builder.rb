@@ -64,36 +64,31 @@ module Axiom
           ast.children
         end
 
-        def update_terminal(name, *args)
-          idx, last = index(name), last_index
-          if idx == 0
-            update([new_node(name, *args)] + children.drop(1))
-          elsif idx < last
-            update((children.take(idx) << new_node(name, *args)) + children.drop(idx + 1))
-          else
-            update(children.take(idx) << new_node(name, *args))
-          end
+        def update(name, *args)
+          idx = index(name)
+          update_child(name, idx, new_node(name, *args))
         end
 
-        def add_terminal(parent, name, *args)
-          idx, last = index(parent), last_index
-          if idx == 0
-            update([children.at(idx) << s(name, *args)] + children.drop(1))
-          elsif idx < last
-            update((children.take(idx) << (children.at(idx) << s(name, *args))) + children.drop(idx + 1))
-          else
-            update(children.take(idx) << s(name, *args))
-          end
+        def add(parent, name, *args)
+          add_node(parent, name, s(name, *args))
+        end
+
+        def add_node(parent, name, node)
+          idx = index(parent)
+          update_child(name, idx, children.at(idx) << node)
         end
 
         def index(name)
           child_names.index(name)
         end
 
-        def last_index
-          child_names.size - 1
+        def head(idx)
+          children.take(idx)
         end
-        memoize :last_index
+
+        def tail(idx)
+          children.drop(idx.succ)
+        end
 
         def child_names
           self.class::CHILDREN
@@ -104,7 +99,11 @@ module Axiom
           send(name).updated(nil, args)
         end
 
-        def update(new_children)
+        def update_child(name, idx, node)
+          update_node(head(idx).push(node, *tail(idx)))
+        end
+
+        def update_node(new_children)
           @ast = @ast.updated(nil, new_children)
           self
         end
