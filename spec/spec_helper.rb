@@ -23,3 +23,7 @@ require 'axiom-schema'
 require 'devtools/spec_helper'
 
 include Axiom
+
+RSpec.configure do |config|
+  config.include(AST::Sexp)
+end

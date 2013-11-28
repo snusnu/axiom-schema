@@ -2,7 +2,14 @@
 
 module Axiom
 
-  # Describes a schema of axiom relations
+  # Holds a schema of axiom relations spanning +n+ databases
   class Schema
+
+    include Concord.new(:relations)
+
+    def [](name)
+      relations[name]
+    end
+
   end # Schema
 end # Axiom
