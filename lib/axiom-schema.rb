@@ -13,7 +13,11 @@ module Axiom
 
     # Raised when trying to establish more than one
     # primary key constraint for a base relation
-    DuplicatePrimaryKey = Class.new(StandardError)
+    class DuplicatePrimaryKey < StandardError
+      def initialize(header)
+        super("#{header} is already defined")
+      end
+    end
 
   end # Schema
 end # Axiom
