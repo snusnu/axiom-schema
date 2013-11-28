@@ -54,8 +54,7 @@ module Axiom
 
           def assert_singular_pk_constraint
             if builder.has_pk_constraint?
-              pk = builder.pk_constraint.to_sexp
-              fail DuplicatePrimaryKey.new(pk)
+              fail DuplicatePrimaryKey.new(builder.pk_constraint.to_sexp)
             end
           end
 
