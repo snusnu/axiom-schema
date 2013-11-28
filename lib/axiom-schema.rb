@@ -15,7 +15,7 @@ module Axiom
     # primary key constraint for a base relation
     class DuplicatePrimaryKey < StandardError
       def initialize(header)
-        super("#{header} is already defined")
+        super("#{header.to_sexp} is already defined")
       end
     end
 
